@@ -2,8 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/login": "pages/login.js",
   "/dashboard": "pages/dashboard.js",
   "/workspace": "pages/workspace.js",
-  "/api/room-leave": "pages/api/room-leave.js"
+  "/api/room-leave": "pages/api/room-leave.js",
+  "/login": "pages/login.js"
 }

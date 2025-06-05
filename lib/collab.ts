@@ -315,6 +315,20 @@ export async function createNewRoom(
     // Also clear the user's rooms cache so they immediately see the new room
     userRoomsCache.delete(userId);
 
+    // Set cache invalidation timestamp for the user
+    try {
+      const userRef = doc(db, "users", userId);
+      await updateDoc(userRef, {
+        cacheInvalidatedAt: serverTimestamp(),
+        lastModifiedRoom: roomId,
+      });
+    } catch (error) {
+      console.warn(
+        `Failed to update cache invalidation for user ${userId}:`,
+        error
+      );
+    }
+
     return roomId;
   } catch (error) {
     console.error("Error creating new room:", error);
@@ -1903,10 +1917,24 @@ export async function deleteRoom(roomId: string): Promise<void> {
     // Clear any cached room data
     clearRoomCache(roomId);
 
-    // Clear the users' room caches
-    userIds.forEach((userId: string) => {
+    // Clear the users' room caches and set cache invalidation markers
+    for (const userId of userIds as string[]) {
       userRoomsCache.delete(userId);
-    });
+
+      // Set cache invalidation timestamp for each user
+      try {
+        const userRef = doc(db, "users", userId);
+        await updateDoc(userRef, {
+          cacheInvalidatedAt: serverTimestamp(),
+          lastModifiedRoom: roomId,
+        });
+      } catch (error) {
+        console.warn(
+          `Failed to update cache invalidation for user ${userId}:`,
+          error
+        );
+      }
+    }
 
     console.log("Successfully deleted room:", roomId);
   } catch (error) {
@@ -1942,6 +1970,20 @@ export async function cleanupOrphanedRoom(
 
     // Clear any cached user room data
     userRoomsCache.delete(userId);
+
+    // Set cache invalidation timestamp for the user
+    try {
+      const userRef = doc(db, "users", userId);
+      await updateDoc(userRef, {
+        cacheInvalidatedAt: serverTimestamp(),
+        lastModifiedRoom: roomId,
+      });
+    } catch (error) {
+      console.warn(
+        `Failed to update cache invalidation for user ${userId}:`,
+        error
+      );
+    }
 
     console.log("Successfully cleaned up orphaned room reference");
   } catch (error) {
