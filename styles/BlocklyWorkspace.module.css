@@ -29,7 +29,7 @@
   background-color: rgba(255, 255, 255, 0.9);
   font-size: 18px;
   font-weight: 500;
-  color: #4285F4;
+  color: #4285f4;
   z-index: 10;
 }
 
@@ -155,7 +155,7 @@
   border-radius: 5px;
   overflow: auto;
   max-height: 220px;
-  font-family: 'Fira Code', 'Consolas', monospace;
+  font-family: "Fira Code", "Consolas", monospace;
   font-size: 14px;
   line-height: 1.5;
   white-space: pre-wrap;
@@ -224,45 +224,45 @@
   color: #fff;
   white-space: nowrap;
   transform: translate(5px, -100%);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 @media (prefers-color-scheme: dark) {
   .blocklyDiv {
     background-color: #2d2d2d;
   }
-  
+
   .toolbar {
     background-color: #333;
     border-bottom: 1px solid #444;
   }
-  
+
   .collaborationStatus {
     background-color: #2a2a2a;
     color: #ddd;
     border-color: #444;
   }
-  
+
   .codeOutput {
     background-color: #1a2533;
   }
-  
+
   .codeOutput pre {
     background-color: #243441;
   }
-  
+
   .toolbarButton {
     background-color: #2980b9;
   }
-  
+
   .toolbarButton:hover {
     background-color: #3498db;
   }
-  
+
   .actionButton {
     background-color: #2980b9;
   }
-  
+
   .actionButton:hover {
     background-color: #3498db;
   }
